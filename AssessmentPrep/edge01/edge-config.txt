@@ -91,8 +91,8 @@ set service dns forwarding allow-from '172.16.150.0/24'
 set service dns forwarding listen-address '172.16.50.2'
 set service dns forwarding listen-address '172.16.150.2'
 set service dns forwarding system
-set service ssh listen-address '0.0.0.0'
-set system host-name 'fw01-luc'
+set service ssh listen-address '172.16.150.2'
+set system host-name 'edge01-luc'
 set system name-server '10.0.17.2'
 set system syslog host 172.16.50.5 facility authpriv
 set zone-policy zone DMZ from LAN firewall name 'LAN-to-DMZ'
