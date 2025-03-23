@@ -12,7 +12,7 @@
  sudo useradd luc -m -G sudo -s /bin/bash
  sudo passwd luc
  ```
- ### Continue on mgmt01 via SSH. Be aware that you may need to get rid of the old SSH key from practicing.
+ ### You should be able to SSH from mgmt01. Be aware that you may need to get rid of the old SSH key from practicing.
  ## isc-dhcp-server configuration
  ```
  sudo apt update
