@@ -18,9 +18,16 @@ sysdm.cpl
 ssh-keygen
 type C:\Users\luc\.ssh\id_rsa.pub | ssh luc@10.0.17.152 "cat >> key"
 ssh 10.0.17.152
+```
+
+### Now on JUMP as luc, switch to root and move the key to luc-jump's authorized keys
+
+```
 sudo -i
 cat /home/luc/key >> /home/luc-jump/.ssh/authorized_keys
 chown -R luc-jump:luc-jump /home/luc-jump/.ssh
 chmod 600 /home/luc-jump/.ssh/authorized_keys
 chmod 700 /home/luc-jump/.ssh
+exit
 ```
+### Test by running `ssh luc-jump@10.0.17.152` from traveler
