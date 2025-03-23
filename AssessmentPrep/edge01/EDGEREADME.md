@@ -1,11 +1,11 @@
 # EDGE01
 
-## Set adapters
-| INTERFACE | NETWORK | ADDRESS         |
-|-----------|---------|-----------------|
-| 1         | WAN     | 10.0.17.152/24  |
-| 2         | DMZ     | 172.16.50.2/29  |
-| 3         | LAN     | 172.16.150.2/24 |
+## Cabling in vCenter
+| INTERFACE     | NETWORK | ADDRESS         |
+|---------------|---------|-----------------|
+| 1 eth0        | WAN     | 10.0.17.152/24  |
+| 2 eth1        | DMZ     | 172.16.50.2/29  |
+| 3 eth2        | LAN     | 172.16.150.2/24 |
 
 ### Make sure you are in configure mode
 ## Restore internet and SSH with [this](https://github.com/fosamil0x/SEC-350-SP25/blob/main/AssessmentPrep/edge01/bare_bones_edge01.txt)
@@ -20,7 +20,6 @@ set protocols static route 0.0.0.0/0 next-hop 10.0.17.2
 set service dns forwarding allow-from '172.16.150.0/24'
 set service dns forwarding listen-address '172.16.150.2'
 set service dns forwarding system
-set service ssh listen-address '0.0.0.0'
 set service ssh listen-address '172.16.150.2'
 set system config-management commit-revisions '100'
 set system host-name 'edge01-luc'
