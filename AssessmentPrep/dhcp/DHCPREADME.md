@@ -8,7 +8,7 @@
  ## Apply the netplan, set a hostname, and set up a sudo user
  ```
  sudo netplan apply
- sudo hostname dhcp01-luc
+ sudo hostnamectl set-hostname dhcp01-luc
  sudo useradd luc -m -G sudo -s /bin/bash
  sudo passwd luc
  ```
