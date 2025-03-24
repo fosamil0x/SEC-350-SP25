@@ -30,7 +30,9 @@
  
  Choose the OS type, architecture, the wazuh server address(172.16.200.10), the name of the agent, and the desired group(linux, ubuntu=os, x86_64).
 
- Run the command on dhcp01. If you have no internet access on DHCP, configure the firewall to temporarily allow it. Disable this after installing the agent.
+ For the provided DHCP Server running ubuntu 22.04, select DEB amd64. 
+ 
+ Run the command on dhcp01. If you have no internet access on DHCP, configure the firewall to temporarily allow it. Disable this after installing   the agent.
  ### Now on dhcp01, run:
  ```
  sudo systemctl daemon-reload
