@@ -14,4 +14,4 @@
 *   edge01 [interface1 eth0 WAN] [interface2 eth1 DMZ] [interface3 eth2 LAN]
 
 * You may need to remove ssh keys from mgmt01. Use the following command if needed
-* ssh-keygen -f "/home/luc/.ssh/known_hosts" -R "IP.ADDRESS.FOR.BOX"
+  `ssh-keygen -f "/home/luc/.ssh/known_hosts" -R "IP.ADDRESS.FOR.BOX` 
