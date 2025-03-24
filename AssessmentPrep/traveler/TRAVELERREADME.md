@@ -28,6 +28,7 @@ cat /home/luc/key >> /home/luc-jump/.ssh/authorized_keys
 chown -R luc-jump:luc-jump /home/luc-jump/.ssh
 chmod 600 /home/luc-jump/.ssh/authorized_keys
 chmod 700 /home/luc-jump/.ssh
-exit
+exit # exits root, now you are luc@jump_box
+exit # exits luc, back to luc@traveler_box
 ```
 ### Test by running `ssh luc-jump@10.0.17.152` from traveler
