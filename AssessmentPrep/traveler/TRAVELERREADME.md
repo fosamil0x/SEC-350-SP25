@@ -3,7 +3,7 @@
 # Networking information
 | ADDRESS             |        SUBNET         | Default Gateway + DNS |
 |---------------------|-----------------------|-----------------------|
-| 10.0.17.52          | 255.255.255.0         | 10.0.17.152           |
+| 10.0.17.52          | 255.255.255.0         | 10.0.17.2           |
 
 ## Create a named user account, configure networking, and set a hostname. Be sure to actually set a hostname and not just a computer description.
 ```powershell
