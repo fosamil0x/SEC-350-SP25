@@ -105,9 +105,9 @@ ufw allow in on wg0 from 10.10.10.0/24 to 172.16.200.11 port 3389 proto tcp
 ufw allow out on ens160 to 172.16.200.0/28
 ufw allow out on ens160 to 172.16.200.11 port 3389 proto tcp
 ```
-2.1 In /etc/default/ufw, set DEFAULT_FORWARD_POLICY="ACCEPT". This is likely set to DROP by default
-2.2 Reload the firewall
+2. In /etc/default/ufw, set DEFAULT_FORWARD_POLICY="ACCEPT". This is likely set to DROP by default
+3.  Reload the firewall
 ```
 ufw reload
 ```
-3. Reactivate wg0 on both the server and the client, then test RDP from the client to mgmt02. If everything is set correctly, this will work :)
+4. Reactivate wg0 on both the server and the client, then test RDP from the client to mgmt02. If everything is set correctly, this will work :)
