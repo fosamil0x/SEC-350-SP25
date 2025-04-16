@@ -6,7 +6,7 @@ Please follow these instrucitons from top to bottom, starting with firewall conf
 
 ## Part 1 - Firewall Configurations
 ### Edge01 - WireGuard Traffic Configuration
-1. Set a rule on WAN-to-DMZ to allow the necessary port for wireguard
+1. Set a rule on WAN-to-DMZ to allow the necessary port for Wireguard
 ```
 set firewall name WAN-to-DMZ rule 518 action accept
 set firewall name WAN-to-DMZ rule 518 description "wireguard from WAN to jump"
@@ -48,14 +48,14 @@ set firewall name LAN-to-MGMT rule 20 source address '172.16.50.6'
 ```
 
 ## Part 2 - Wireguard Server Config
-### Commands
-This was the process that I followed for setting up wireguard on my ubuntu 22.04 jump server. I did all of these commands as root.
+### Commands and setup
+This was the process that I followed for setting up Wireguard on my ubuntu 22.04 jump server. I did all of these commands as root.
 
-1. Install wireguard packages
+1. Install Wireguard packages
 ```
 apt install wireguard wireguard-tools -y
 ```
-2. Make a directory for wireguard and cd to it
+2. Make a directory for Wireguard and cd to it
 ```
 mkdir /etc/wireguard
 cd /etc/wireguard
@@ -64,3 +64,9 @@ cd /etc/wireguard
 ```
 nano /etc/wireguard/wg0.conf
 ```
+4. Add [this content](https://github.com/fosamil0x/SEC-350-SP25/blob/main/Project2/wg0.conf.txt) to the wg0.conf file.
+
+## Part 3 - Wireguard Client Config
+### Setup
+1. Install Wireguard from [their install page](https://www.wireguard.com/install/)
+2. 
