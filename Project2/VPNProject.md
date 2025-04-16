@@ -34,6 +34,8 @@ set firewall name DMZ-to-LAN rule 20 destination address '172.16.200.11'
 set firewall name DMZ-to-LAN rule 20 destination port '3389'
 set firewall name DMZ-to-LAN rule 20 protocol 'tcp'
 set firewall name DMZ-to-LAN rule 20 source address '172.16.50.6'
+commit
+save
 ```
 
 ### fw-mgmt RDP Configuration
@@ -45,10 +47,12 @@ set firewall name LAN-to-MGMT rule 20 destination address '172.16.200.11'
 set firewall name LAN-to-MGMT rule 20 destination port '3389'
 set firewall name LAN-to-MGMT rule 20 protocol 'tcp'
 set firewall name LAN-to-MGMT rule 20 source address '172.16.50.6'
+commit
+save
 ```
 
 ## Part 2 - Wireguard Server Config
-### Commands and setup
+### jump - Commands and setup
 This was the process that I followed for setting up Wireguard on my ubuntu 22.04 jump server. I did all of these commands as root.
 
 1. Install Wireguard packages
@@ -65,8 +69,45 @@ cd /etc/wireguard
 nano /etc/wireguard/wg0.conf
 ```
 4. Add [this content](https://github.com/fosamil0x/SEC-350-SP25/blob/main/Project2/wg0.conf.txt) to the wg0.conf file.
+5. Enable IP Forwarding
+5.1 In /etc/sysctl.conf, add or uncomment a line for net.ipv4.ip_forward=1
+5.2 Apply the change
+```
+sysctl -p # This should return "net.ipv4.ip_forward=1"
+```
+6. Pause here and move over to the machine you intend to use as a Wireguard client.
 
 ## Part 3 - Wireguard Client Config
-### Setup
+### client - Setup
 1. Install Wireguard from [their install page](https://www.wireguard.com/install/)
-2. 
+2. Add an emtpy interface and edit the config to be similar to the one from [this image](https://github.com/fosamil0x/SEC-350-SP25/blob/main/Project2/wgClient.png)
+
+## Part 4 - Activating and Testing wg0
+### jump - Activate the interface
+1. Activate the wireguard interface
+```
+wg-quick up wg0 # run this as root in the /etc/wireguard directory
+```
+### client - Activate the interface
+2. Be sure that the interface is active in the Wireguard GUI. You can test this by pinging the Wireguard Server (in my case, 10.10.10.1) from the client. If pings are successful, then things are all good!
+3. If pings worked, attempt to RDP to 172.16.200.11. If things fail, check firewall rules, NAT forwarding, config files, RDP enabled on mgmt02, and the status of wg0 on both the client and the server
+
+## Part 5 - Configuring the Firewall on jump
+### jump - ufw configuration
+This is recommended after testing rdp. These steps are
+1. Set these configurations to allow SSH, RDP, and Wireguard, to work with the firewall on jump
+```
+ufw allow 51820/udp
+ufw allow 22/tcp
+ufw allow 3389/tcp
+ufw allow in on wg0 from 10.0.0.0/24 to 172.16.200.0/28 # allows rdp to mgmt subnet if necessary, but we don't need it in this case
+ufw allow in on wg0 from 10.10.10.0/24 to 172.16.200.11 port 3389 proto tcp
+ufw allow out on ens160 to 172.16.200.0/28 # allows rdp to mgmt subnet if necessary, but we don't need it in this case
+ufw allow out on ens160 to 172.16.200.11 port 3389 proto tcp
+```
+2.1 In /etc/default/ufw, set DEFAULT_FORWARD_POLICY="ACCEPT". This is likely set to DROP by default
+2.2 Reload the firewall
+```
+ufw reload
+```
+3. Reactivate wg0 on both the server and the client, then test RDP from the client to mgmt02. If everything is set correctly, this will work :)
