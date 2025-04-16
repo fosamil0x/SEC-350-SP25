@@ -94,8 +94,8 @@ wg-quick up wg0 # run this as root in the /etc/wireguard directory
 
 ## Part 5 - Configuring the Firewall on jump
 ### jump - ufw configuration
-This is recommended after testing rdp. These steps are
-1. Set these configurations to allow SSH, RDP, and Wireguard, to work with the firewall on jump
+This is recommended after testing RDP.
+1. Set SSH, RDP, and Wireguard rules for the firewall on jump
 ```
 ufw allow 51820/udp
 ufw allow 22/tcp
