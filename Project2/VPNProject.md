@@ -79,7 +79,7 @@ sysctl -p # This should return "net.ipv4.ip_forward=1"
 
 ## Part 3 - Wireguard Client Config
 ### client - Setup
-1. Install Wireguard from [their install page](https://www.wireguard.com/install/)
+1. Install Wireguard from [their install page](https://www.wireguard.com/install/). I am on a Windows 10 machine, so that is what I installed.
 2. Add an emtpy interface and edit the config to be similar to the one from [this image](https://github.com/fosamil0x/SEC-350-SP25/blob/main/Project2/wgClient.png)
 
 ## Part 4 - Activating and Testing wg0
@@ -89,7 +89,7 @@ sysctl -p # This should return "net.ipv4.ip_forward=1"
 wg-quick up wg0 # run this as root in the /etc/wireguard directory
 ```
 ### client - Activate the interface
-2. Be sure that the interface is active in the Wireguard GUI. You can test this by pinging the Wireguard Server (in my case, 10.10.10.1) from the client. If pings are successful, then things are all good!
+2. Activate the interface if it isn't already active in the Wireguard GUI. You can test this by pinging the Wireguard Server (in my case, 10.10.10.1) from the client. If pings are successful, then things are all good!
 3. If pings worked, attempt to RDP to 172.16.200.11. If things fail, check firewall rules, NAT forwarding, config files, RDP enabled on mgmt02, and the status of wg0 on both the client and the server
 
 ## Part 5 - Configuring the Firewall on jump
@@ -100,9 +100,9 @@ This is recommended after testing RDP.
 ufw allow 51820/udp
 ufw allow 22/tcp
 ufw allow 3389/tcp
-ufw allow in on wg0 from 10.0.0.0/24 to 172.16.200.0/28 # allows rdp to mgmt subnet if necessary, but we don't need it in this case
+ufw allow in on wg0 from 10.0.0.0/24 to 172.16.200.0/28
 ufw allow in on wg0 from 10.10.10.0/24 to 172.16.200.11 port 3389 proto tcp
-ufw allow out on ens160 to 172.16.200.0/28 # allows rdp to mgmt subnet if necessary, but we don't need it in this case
+ufw allow out on ens160 to 172.16.200.0/28
 ufw allow out on ens160 to 172.16.200.11 port 3389 proto tcp
 ```
 2.1 In /etc/default/ufw, set DEFAULT_FORWARD_POLICY="ACCEPT". This is likely set to DROP by default
