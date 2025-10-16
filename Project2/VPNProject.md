@@ -70,8 +70,10 @@ nano /etc/wireguard/wg0.conf
 ```
 4. Add [this content](https://github.com/fosamil0x/SEC-350-SP25/blob/main/Project2/wg0.conf.txt) to the wg0.conf file.
 5. Enable IP Forwarding
-5.1 In /etc/sysctl.conf, add or uncomment a line for net.ipv4.ip_forward=1
-5.2 Apply the change
+
+      5.1 In /etc/sysctl.conf, add or uncomment a line for net.ipv4.ip_forward=1
+
+      5.2 Apply the change
 ```
 sysctl -p # This should return "net.ipv4.ip_forward=1"
 ```
